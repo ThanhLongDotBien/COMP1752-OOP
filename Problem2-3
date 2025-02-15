@@ -1,45 +1,39 @@
 
 class Student:
-    def __init__(self, name: str, major: str, student_id: str):
+    def __init__(self, name: str, major: str, id: str):
         self.name = name
         self.major = major
-        self.student_id = student_id
-
+        self.id = id
 
 class FullTimeStudent(Student):
-    def __init__(self, name: str, major: str, student_id: str, joined_project: str, research_profile: str):
-        super().__init__(name, major, student_id)
-        self.joined_project = joined_project
-        self.research_profile = research_profile
-
+    def __init__(self, name: str, major: str, id: str, joinedP: str, researchP: str):
+        super().__init__(name, major, id)
+        self.joinedP= joinedP
+        self.researchP = researchP
 
 class PartTimeStudent(Student):
     count = 0  
-
-    def __init__(self, name: str, major: str, student_id: str, min_hour: int, max_hour: int):
-        super().__init__(name, major, student_id)
+    def __init__(self, name: str, major: str, id: str, min_hour: int, max_hour: int):
+        super().__init__(name, major, id)
         self.min_hour = min_hour
         self.max_hour = max_hour
         PartTimeStudent.count += 1  
-
-# Problem 2
-    @staticmethod
     def get_count():
         return PartTimeStudent.count  
 
-s1 = PartTimeStudent("Alice", "Computer Science", "PT001", 10, 20)
-s2 = PartTimeStudent("Bob", "Math", "PT002", 5, 15)
+student1 = PartTimeStudent("Cuong", "Computer Science", "GCS001", 10, 20)
+student2 = PartTimeStudent("Nhu", "Data Management", "GCS002", 5, 15)
 
-print(f"Total Part-Time Students: {PartTimeStudent.get_count()}")
+print(f"Total PartTimeStudents: {PartTimeStudent.get_count()}")
 
 
 class Lecturer:
-    def __init__(self, lecturer_id: str, name: str, rank: str, project_led: str, research_profile: str):
+    def __init__(self, lecturer_id: str, name: str, rank: str, projectLed: str, researchP: str):
         self.lecturer_id = lecturer_id
         self.name = name
         self.rank = rank
-        self.project_led = project_led
-        self.research_profile = research_profile
+        self.projectLed = projectLed
+        self.researchP = researchP
 
 
 class Project:
@@ -49,30 +43,29 @@ class Project:
         self.leader = leader
         self.members = members
 
-# Problem 3
 class SchoolSystem:
     def __init__(self):
-        self.students = []  # Danh sách sinh viên
-        self.lecturers = []  # Danh sách giảng viên
-        self.projects = []  # Danh sách dự án
+        self.students = [] 
+        self.lecturers = []  
+        self.projects = []  
 
     def add_student(self, student: Student):
         if len(self.students) < 10:
             self.students.append(student)
             return True
-        return False  # Không thể thêm nếu danh sách đã đầy
+        return False 
 
     def add_lecturer(self, lecturer: Lecturer):
         if len(self.lecturers) < 10:
             self.lecturers.append(lecturer)
             return True
-        return False  # Không thể thêm nếu danh sách đã đầy
+        return False 
 
     def add_project(self, project: Project):
         if len(self.projects) < 10:
             self.projects.append(project)
             return True
-        return False  # Không thể thêm nếu danh sách đã đầy
+        return False 
 
     def display_students(self):
         print("Students List:")
@@ -89,28 +82,72 @@ class SchoolSystem:
         for project in self.projects:
             print(project.name)
 
-# Tạo hệ thống trường học
 school = SchoolSystem()
 
-# Tạo giảng viên và dự án
-lecturer1 = Lecturer("L001", "Dr. John", "Professor", "AI Research", "Machine Learning")
+lecturer1 = Lecturer("L001", "Mr. Bao", "Professor", "AI Research", "Machine Learning")
+lecturer2 = Lecturer("L002", "Mr. Van", "Security Professor", "Data Science", "Deep Learning")
+lecturer3 = Lecturer("L003", "Dr. Williams", "Assistant Professor", "Cybersecurity", "Network Security")
+lecturer4 = Lecturer("L004", "Dr. Brown", "Professor", "Robotics", "AI in Robotics")
+lecturer5 = Lecturer("L005", "Dr. Taylor", "Professor", "Blockchain", "Cryptography")
 project1 = Project("AI Research", 5000, lecturer1, [])
+project2 = Project("Deep Learning", 7000, lecturer2, [])
+project3 = Project("Cybersecurity", 6000, lecturer3, [])
+project4 = Project("Robotics AI", 8000, lecturer4, [])
+project5 = Project("Blockchain Security", 6500, lecturer5, [])
 
-# Thêm giảng viên và dự án vào hệ thống
 school.add_lecturer(lecturer1)
+school.add_lecturer(lecturer2)
+school.add_lecturer(lecturer3)
+school.add_lecturer(lecturer4)
+school.add_lecturer(lecturer5)
 school.add_project(project1)
+school.add_project(project2)
+school.add_project(project3)
+school.add_project(project4)
+school.add_project(project5)
 
-# Tạo sinh viên và thêm vào hệ thống
-student1 = FullTimeStudent("Alice", "Computer Science", "F001", project1.name, "AI Enthusiast")
-student2 = PartTimeStudent("Bob", "Math", "P001", 5, 15)
+student1 = FullTimeStudent("Cuong", "Computer Science", "GCS0001", project1.name, "AI Enthusiast")
+student2 = PartTimeStudent("Nhu", "Data Management", "GCS0002", 5, 15)
+student3 = FullTimeStudent("Qui", "Math", "GCS0003", project2.name, "Quantum Mechanics")
+student4 = PartTimeStudent("Bao", "Engineering", "GCS0004", 10, 20)
+student5 = FullTimeStudent("Toan", "Cybersecurity", "GCS0005", project3.name, "Ethical Hacking")
+student6 = PartTimeStudent("Quan", "Robotics", "P0006", 8, 18)
+student7 = FullTimeStudent("Vinh", "Data Science", "F0007", project2.name, "Big Data Analysis")
+student8 = PartTimeStudent("Hank", "Physics", "P0008", 12, 22)
+student9 = FullTimeStudent("Ivy", "Computer Science", "F0009", project4.name, "AI in Robotics")
+student10 = PartTimeStudent("Jack", "Mathematics", "P0010", 6, 14)
+student11 = FullTimeStudent("Kevin", "Blockchain", "F0011", project5.name, "Decentralized Systems")
+student12 = PartTimeStudent("Linda", "Cryptography", "P0012", 7, 16)
+student13 = FullTimeStudent("Michael", "AI Ethics", "F0013", project1.name, "AI Policy")
+student14 = PartTimeStudent("Nancy", "Software Engineering", "P0014", 9, 19)
+student15 = FullTimeStudent("Oscar", "Robotics", "F0015", project4.name, "Autonomous Vehicles")
 
 school.add_student(student1)
 school.add_student(student2)
+school.add_student(student3)
+school.add_student(student4)
+school.add_student(student5)
+school.add_student(student6)
+school.add_student(student7)
+school.add_student(student8)
+school.add_student(student9)
+school.add_student(student10)
+school.add_student(student11)
+school.add_student(student12)
+school.add_student(student13)
+school.add_student(student14)
+school.add_student(student15)
 
-# Hiển thị danh sách
 school.display_students()
 school.display_lecturers()
 school.display_projects()
+
+
+
+
+
+
+
 
 
 
